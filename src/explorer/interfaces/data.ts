@@ -1,4 +1,7 @@
-export interface Data {
+import { Document } from "mongoose"
+
+
+export interface Data  extends Document{
     id?: number;
     consumer: string;
     dateTime: string;    

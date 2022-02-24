@@ -1,4 +1,6 @@
-import { Body, Controller, Get, Param, Query } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Query } from '@nestjs/common';
+import { prependListener } from 'process';
+import { dataModelDto } from './dto/dataModel.dto';
 import { ExplorerService } from './explorer.service';
 import { Data } from './interfaces/data';
 
@@ -8,7 +10,7 @@ export class ExplorerController {
     constructor( private explorerService: ExplorerService){}
     //devuelve todas las transacciones
     @Get("all")
-    getAll(): Data[]{
+    getAll(): Promise<Data[]>{
         return this.explorerService.getAll();
     }
     //busca por id de transaccion y la devuelve
@@ -16,8 +18,38 @@ export class ExplorerController {
     getById(@Param("id") id){
         return this.explorerService.getById(id);
     }
-    //busca por cliente y devuelve todas las transacciones de ese cliente
+    @Post()
+    createTransact(@Body() data: dataModelDto): Promise<Data> {
+        return this.explorerService.createTransaction(data)
+    }
+    @Delete(":id")
+    async delete(@Param("id") id){
+        const deleted = await this.explorerService.delete(id)
+        return deleted
+    }
+
     @Get("client")
+    getByClient(@Query("name") client): Promise<Data[]>{
+        const cliente = this.explorerService.getByClient(client)
+        return cliente
+    }
+
+    @Get("req")
+    getByRequest(@Query("request") request): Promise<Data[]>{
+        return this.explorerService.getByRequest(request)
+    }
+    
+    @Get("date")
+    getByDate(@Query("date") date): Promise<Data[]>{
+        return this.explorerService.getByDate(date)
+    }
+    @Get("dates")
+    getByDates(@Query("pre") pre, @Query("post") post): Promise<any>{
+        
+        return this.explorerService.getByDates(pre,post)
+    }
+    //busca por cliente y devuelve todas las transacciones de ese cliente
+  /*  @Get("client")
     getByClient(@Query("clientName") client){
         return this.explorerService.getByClient(client)
     }
@@ -36,6 +68,6 @@ export class ExplorerController {
     getByDates(@Query("pre") pre, @Query("post") post){
         return this.explorerService.getByDates(pre,post)
     }
-    
+    */
 
 }
