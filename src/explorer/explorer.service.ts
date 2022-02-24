@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { Data } from './interfaces/data';
+import { Data } from './interfaces/explorer.interface';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { DataExplorerModelDto} from './dto/dataModel.dto';

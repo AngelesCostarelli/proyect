@@ -2,7 +2,7 @@ import { Body, Controller, Delete, Get, Param, Post, Query } from '@nestjs/commo
 import { prependListener } from 'process';
 import { DataExplorerModelDto } from './dto/dataModel.dto';
 import { ExplorerService } from './explorer.service';
-import { Data } from './interfaces/data';
+import { Data } from './interfaces/explorer.interface';
 
 @Controller('explorer')
 export class ExplorerController {
