@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { Data } from './interfaces/data';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { dataModelDto } from './dto/dataModel.dto';
+import { DataExplorerModelDto} from './dto/dataModel.dto';
 
 
 
@@ -93,8 +93,8 @@ export class ExplorerService {
         return await this.DataModel.findById(id)
     }
 
-    async createTransaction(data: dataModelDto){
-        const newTrans = new this.DataModel(data)
+    async createTransaction(dataExplorerModelDto: DataExplorerModelDto){
+        const newTrans = new this.DataModel(dataExplorerModelDto)
         return await newTrans.save()
     }
     async delete(id): Promise<any>{
@@ -159,12 +159,12 @@ export class ExplorerService {
 }
 
 
-function toMs(dateStr) {
-    // desarmamos el string por los '/' los descartamos y lo transformamos en un array
-    let parts = dateStr.split("/")
-   console.log(parts)
-    // parts[2] es año
-    // parts[1] el mes
-    // parts[0] el día
-    return new Date(parts[2], parts[1] - 1, parts[0]).getTime()
-  }
+// function toMs(dateStr) {
+//     // desarmamos el string por los '/' los descartamos y lo transformamos en un array
+//     let parts = dateStr.split("/")
+//    console.log(parts)
+//     // parts[2] es año
+//     // parts[1] el mes
+//     // parts[0] el día
+//     return new Date(parts[2], parts[1] - 1, parts[0]).getTime()
+//   }

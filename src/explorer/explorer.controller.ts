@@ -1,6 +1,6 @@
 import { Body, Controller, Delete, Get, Param, Post, Query } from '@nestjs/common';
 import { prependListener } from 'process';
-import { dataModelDto } from './dto/dataModel.dto';
+import { DataExplorerModelDto } from './dto/dataModel.dto';
 import { ExplorerService } from './explorer.service';
 import { Data } from './interfaces/data';
 
@@ -19,8 +19,8 @@ export class ExplorerController {
         return this.explorerService.getById(id);
     }
     @Post()
-    createTransact(@Body() data: dataModelDto): Promise<Data> {
-        return this.explorerService.createTransaction(data)
+    createTransact(@Body() dataExplorerModelDto: DataExplorerModelDto): Promise<Data> {
+        return this.explorerService.createTransaction(dataExplorerModelDto)
     }
     @Delete(":id")
     async delete(@Param("id") id){
@@ -48,26 +48,6 @@ export class ExplorerController {
         
         return this.explorerService.getByDates(pre,post)
     }
-    //busca por cliente y devuelve todas las transacciones de ese cliente
-  /*  @Get("client")
-    getByClient(@Query("clientName") client){
-        return this.explorerService.getByClient(client)
-    }
-    //busca por metodo y devuelve todas las transacciones realizadas con ese metodo
-    @Get("req")
-    getByRequest(@Query("request") request){
-        return this.explorerService.getByRequest(request)
-    }
-    //busca por fecha
-    @Get("date")
-    getByDate(@Query("date") date){
-        return this.explorerService.getByDate(date)
-    }
-    //busca por periodo de fechas
-    @Get("dates")
-    getByDates(@Query("pre") pre, @Query("post") post){
-        return this.explorerService.getByDates(pre,post)
-    }
-    */
+    
 
 }
