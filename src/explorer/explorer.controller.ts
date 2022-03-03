@@ -1,6 +1,6 @@
 import { Body, Controller, Delete, Get, Param, Post, Query } from '@nestjs/common';
 import { prependListener } from 'process';
-import { DataExplorerModelDto } from './dto/dataModel.dto';
+import { DataExplorerModelDto } from './dto/dataExplorerModel.dto';
 import { ExplorerService } from './explorer.service';
 import { Data } from './interfaces/explorer.interface';
 
@@ -48,6 +48,24 @@ export class ExplorerController {
         
         return this.explorerService.getByDates(pre,post)
     }
+
+    @Get("month")
+    getLastMonth(): Promise<any>{
+        return this.explorerService.getLastMonth();
+    }
+    @Get("hour")
+    getLastHour(): Promise<any>{
+        return this.explorerService.getLastHour();
+    }
+    @Get("day")
+    getLastDay(): Promise<any>{
+        return this.explorerService.getLastDay();
+    }
+    @Get("week")
+    getLastSevenDays(): Promise<any>{
+        return this.explorerService.getLastSevenDays();
+    }
+    
     
 
 }

@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { Data } from './interfaces/explorer.interface';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { DataExplorerModelDto} from './dto/dataModel.dto';
+import { DataExplorerModelDto } from './dto/dataExplorerModel.dto'; 
 
 
 
@@ -95,6 +95,7 @@ export class ExplorerService {
 
     async createTransaction(dataExplorerModelDto: DataExplorerModelDto){
         const newTrans = new this.DataModel(dataExplorerModelDto)
+       
         return await newTrans.save()
     }
     async delete(id): Promise<any>{
@@ -123,6 +124,31 @@ export class ExplorerService {
         let filter = this.DataModel.find({$and : [{dateTime : {$gte : pre }}, {dateTime : {$lte : post}}]})
         return filter 
        
+    }
+
+    async getLastMonth(){
+        var d = new Date();
+        d.setMonth(d.getMonth() - 1); //1 month ago
+        let found = await this.DataModel.find({dateTime:{$gte:d}}); 
+            return found
+    }
+    async getLastHour(){
+        var d = new Date();
+        d.setHours(d.getHours() - 1); //1 hour ago
+        let found = await this.DataModel.find({dateTime:{$gte:d}}); 
+            return found
+    }
+    async getLastDay(){
+        var d = new Date();
+        d.setHours(d.getHours() - 24); //1 hour ago
+        let found = await this.DataModel.find({dateTime:{$gte:d}}); 
+            return found
+    }
+    async getLastSevenDays(){
+        var d = new Date();
+        d.setHours(d.getHours() - 168); //1 hour ago
+        let found = await this.DataModel.find({dateTime:{$gte:d}}); 
+            return found
     }
 
     
