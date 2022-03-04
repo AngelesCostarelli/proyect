@@ -8,7 +8,7 @@ import { Data } from './interfaces/explorer.interface';
 export class ExplorerController {
     //tengo que instanciar a ExplorerService para poder usarlo
     constructor( private explorerService: ExplorerService){}
-    //devuelve todas las transacciones
+    
     @Get("all")
     getAll(): Promise<Data[]>{
         return this.explorerService.getAll();

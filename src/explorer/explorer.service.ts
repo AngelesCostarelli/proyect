@@ -151,46 +151,7 @@ export class ExplorerService {
             return found
     }
 
-    
-    // getAll(): Data[]{
-    //     return this.data;
-    // }
-
-    // getById(id){
-    //     return this.data.find(e => e.id == id);
-    // }
-    /*
-    getByClient(client){
-        return this.DataModel.filter(e => e.consumer == client);
-    }
-    getByRequest(req){
-        return this.DataModel.filter(e => e.requestBody == req);
-    }
-    getByDate(date){
-        return this.DataModel.filter(e => e.dateTime == date);
-    }
-    
-    getByDates(preDate, postDate){
-        let pre = toMs(preDate)
-        let post = toMs(postDate)
-        let filter = this.data.filter((e) => {
-           return toMs(e.dateTime) >= pre && toMs(e.dateTime) <= post
-        })
-
-        console.log(filter)
-        return filter;
-    }
-
-*/
+  
 }
 
 
-// function toMs(dateStr) {
-//     // desarmamos el string por los '/' los descartamos y lo transformamos en un array
-//     let parts = dateStr.split("/")
-//    console.log(parts)
-//     // parts[2] es año
-//     // parts[1] el mes
-//     // parts[0] el día
-//     return new Date(parts[2], parts[1] - 1, parts[0]).getTime()
-//   }
